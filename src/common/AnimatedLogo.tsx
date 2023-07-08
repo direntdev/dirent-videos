@@ -7,6 +7,11 @@ export const AnimatedLogo = () => {
 	const video = useVideoConfig();
 	const frame = useCurrentFrame();
 
+	const zoomIn = interpolate(frame, [0, 30], [0, 1], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+		easing: Easing.elastic(1),
+	});
 	const scaleX = interpolate(frame, [30, 60], [1, 0], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
@@ -77,25 +82,41 @@ export const AnimatedLogo = () => {
 					src={staticFile('logo-right.svg')}
 				/>
 			</Sequence>
-			<Sequence durationInFrames={30}>
+			<Sequence from={90} durationInFrames={30}>
 				<Img
-					style={{transform: `translateX(${leftLogoTranslateX}px)`}}
+					style={{
+						transform: `translateX(${leftLogoTranslateX}px) rotateZ(${leftLogoRotate}deg) `,
+					}}
 					className="absolute"
 					width={400}
 					src={staticFile('logo-left.svg')}
 				/>
 				<Img
-					style={{transform: `translateX(${rightLogoTranslateX}px)`}}
+					style={{
+						transform: `translateX(${leftLogoTranslateX}px) rotateZ(${leftLogoRotate}deg) `,
+					}}
 					className="absolute"
 					width={400}
 					src={staticFile('logo-right.svg')}
 				/>
 			</Sequence>
 			<div
-				style={{opacity: scaleX, fontSize: 200, transform: `scaleX(${scaleX})`}}
-				className="relative text-white font-bold leading-relaxed font-mono"
+				style={{
+					opacity: scaleX,
+					fontSize: 200,
+					transform: frame < 30 ? `scale(${zoomIn})` : `scaleX(${scaleX})`,
+				}}
+				className="relative text-white font-bold font-mono  bg-blue-500 flex justify-center items-center"
 			>
-				DIRENT
+				<span
+					style={{
+						textShadow: '10px 10px 4px rgba(0, 220, 220, 1)',
+					}}
+					className="absolute blur-3xl"
+				>
+					DIRENT
+				</span>
+				<span className="absolute">DIRENT</span>
 			</div>
 		</div>
 	);

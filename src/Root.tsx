@@ -25,7 +25,7 @@ export const RemotionRoot: React.FC = () => {
 				{...format}
 				id="QuickTips-DragAndDrop"
 				component={QuickTipsDragAndDrop}
-				durationInFrames={90}
+				durationInFrames={180}
 				defaultProps={{
 					title: 'Drag and drop',
 				}}
