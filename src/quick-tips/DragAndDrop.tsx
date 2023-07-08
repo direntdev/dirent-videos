@@ -1,3 +1,4 @@
+import {Audio} from 'remotion';
 import {useCurrentFrame} from 'remotion';
 import {Easing} from 'remotion';
 import {interpolate} from 'remotion';
@@ -16,6 +17,7 @@ export const QuickTipsDragAndDrop = (props: {title: string}) => {
 	});
 	return (
 		<AbsoluteFill className="items-center justify-center">
+			<Audio src={staticFile('audio.mp4')} />
 			<FloatingBackground />
 			<Sequence style={{opacity: fade}} durationInFrames={120}>
 				<Intro title={props.title} />
